@@ -63,5 +63,8 @@ public class Main {
         basket.printCart();
 
         clientLog.exportAsCSV(clientLog.file);
+
+        XMLReader xmlReader = new XMLReader();
+        xmlReader.xml();
     }
 }
