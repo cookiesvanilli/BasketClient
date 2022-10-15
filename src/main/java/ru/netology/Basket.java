@@ -1,11 +1,12 @@
 package ru.netology;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
 public class Basket {
@@ -75,6 +76,23 @@ public class Basket {
         basket.printCart();
         return basket;
 
+    }
+
+    public void toJsonFile() {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("productName", Arrays.toString(productName));
+        jsonObject.put("prices", Arrays.toString(prices));
+        jsonObject.put("productCount", Arrays.toString(productCount));
+
+        try {
+            FileWriter fileWriter = new FileWriter("basket.json");
+            fileWriter.write(jsonObject.toJSONString());
+            fileWriter.flush();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void printAllProducts() {

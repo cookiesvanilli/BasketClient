@@ -1,14 +1,21 @@
 package ru.netology;
 
+import org.json.JSONObject;
+import org.json.JSONWriter;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         String[] productName = {"Bread", "Apples", "Milk"};
         int[] prices = {100, 200, 300};
+        ClientLog clientLog = new ClientLog();
 
         File file = new File("basket.txt");
         Basket basket = new Basket(productName, prices);
@@ -43,14 +50,18 @@ public class Main {
                 continue;
             }
 
-            if (productAmount > productName.length || productAmount <= 0) {
+            if (productNum > productName.length || productNum < 0) {
                 System.out.println("This product is not exist!!!");
                 continue;
             }
-
+            clientLog.log(productNum, productAmount);
             basket.addToCart(productNum, productAmount);
         }
         basket.saveText(file);
+        basket.toJsonFile();
+
         basket.printCart();
+
+        clientLog.exportAsCSV(clientLog.file);
     }
 }
