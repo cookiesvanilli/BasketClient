@@ -1,13 +1,17 @@
 package ru.netology;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.awt.print.Book;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Basket {
     private String[] productName;
@@ -80,18 +84,34 @@ public class Basket {
 
     public void toJsonFile() {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("productName", Arrays.toString(productName));
-        jsonObject.put("prices", Arrays.toString(prices));
-        jsonObject.put("productCount", Arrays.toString(productCount));
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        try {
-            FileWriter fileWriter = new FileWriter("basket.json");
-            fileWriter.write(jsonObject.toJSONString());
-            fileWriter.flush();
+        try (FileWriter writer = new FileWriter("basket.json")) {
+            Map<String, Object> food = new HashMap<>();
+            food.put("productName", productName);
+            food.put("prices", prices);
+            food.put("productCount", productCount);
+            gson.toJson(food, writer);
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public void fromJsonFile() {
+        try {
+            Gson gson = new Gson();
+            Reader reader = new FileReader("basket.json");
+            Basket basket = gson.fromJson(reader, Basket.class);
+            //System.out.println(basket);
+            System.out.println(Arrays.toString(basket.productName) + "\n"
+                    + Arrays.toString(basket.prices) + "\n"
+                    + Arrays.toString(basket.productCount));
+            reader.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

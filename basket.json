@@ -1,0 +1,17 @@
+{
+  "prices": [
+    100,
+    200,
+    300
+  ],
+  "productCount": [
+    22,
+    0,
+    0
+  ],
+  "productName": [
+    "Bread",
+    "Apples",
+    "Milk"
+  ]
+}

@@ -1,8 +1,5 @@
 package ru.netology;
 
-import org.json.JSONObject;
-import org.json.JSONWriter;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +18,8 @@ public class Main {
         Basket basket = new Basket(productName, prices);
 
         if (file.exists()) {
-            Basket.loadFromTxtFile(file);
+            //Basket.loadFromTxtFile(file);
+            basket.fromJsonFile();
         } else {
             basket.printAllProducts();
         }
