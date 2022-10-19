@@ -1,10 +1,6 @@
 package ru.netology;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +14,7 @@ public class Main {
         Basket basket = new Basket(productName, prices);
 
         if (file.exists()) {
-            //Basket.loadFromTxtFile(file);
+          //  Basket.loadFromTxtFile(file);
             basket.fromJsonFile();
         } else {
             basket.printAllProducts();
@@ -52,8 +48,9 @@ public class Main {
                 System.out.println("This product is not exist!!!");
                 continue;
             }
-            clientLog.log(productNum, productAmount);
+
             basket.addToCart(productNum, productAmount);
+            clientLog.log(productNum, productAmount);
         }
         basket.saveText(file);
         basket.toJsonFile();
