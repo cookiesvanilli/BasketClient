@@ -23,7 +23,6 @@ public class ClientLog {
             FileWriter writer;
             File txtFile = new File("log.txt");
             Scanner scan = new Scanner(file);
-            csvFile = new File("log.csv");
             txtFile.createNewFile();
             writer = new FileWriter(csvFile);
             writer.append("productNum, amount" + "\n");

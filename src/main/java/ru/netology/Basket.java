@@ -98,15 +98,12 @@ public class Basket {
     }
 
 
-    public void fromJsonFile() {
+    public static void fromJsonFile() {
         try {
             Gson gson = new Gson();
             Reader reader = new FileReader("basket.json");
             Basket basket = gson.fromJson(reader, Basket.class);
             System.out.println(basket);
-        /*    System.out.println(Arrays.toString(basket.productName) + "\n"
-                    + Arrays.toString(basket.prices) + "\n"
-                    + Arrays.toString(basket.productCount));*/
             reader.close();
 
         } catch (Exception ex) {
