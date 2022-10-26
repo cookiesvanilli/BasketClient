@@ -15,7 +15,7 @@ public class Main {
 
         if (file.exists()) {
           //  Basket.loadFromTxtFile(file);
-            basket.fromJsonFile();
+            Basket.fromJsonFile("basket.json");
         } else {
             basket.printAllProducts();
         }
@@ -53,7 +53,7 @@ public class Main {
             clientLog.log(productNum, productAmount);
         }
         basket.saveText(file);
-        basket.toJsonFile();
+        basket.toJsonFile("basket.json");
 
         basket.printCart();
 

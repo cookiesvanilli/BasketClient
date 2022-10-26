@@ -18,13 +18,13 @@ public class ClientLog {
         }
     }
 
-    public void exportAsCSV(File csvFile) {
-        try {
-            FileWriter writer;
+    public void exportAsCSV(File csvFile) throws IOException {
+        Scanner scan = new Scanner(file);
+        try (
+                FileWriter writer = new FileWriter(csvFile);
+        ) {
             File txtFile = new File("log.txt");
-            Scanner scan = new Scanner(file);
             txtFile.createNewFile();
-            writer = new FileWriter(csvFile);
             writer.append("productNum, amount" + "\n");
             while (scan.hasNext()) {
                 String csv = scan.nextLine().replace("|", ",");

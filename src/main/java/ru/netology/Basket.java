@@ -78,9 +78,9 @@ public class Basket {
 
     }
 
-    public void toJsonFile() {
+    public void toJsonFile(String pathJson) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter("basket.json")) {
+        try (FileWriter writer = new FileWriter(pathJson)) {
             gson.toJson(this, writer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,14 +98,13 @@ public class Basket {
     }
 
 
-    public static void fromJsonFile() {
-        try {
-            Gson gson = new Gson();
-            Reader reader = new FileReader("basket.json");
+    public static void fromJsonFile(String pathJson) {
+        Gson gson = new Gson();
+        try (
+                Reader reader = new FileReader(pathJson);
+        ) {
             Basket basket = gson.fromJson(reader, Basket.class);
             System.out.println(basket);
-            reader.close();
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
